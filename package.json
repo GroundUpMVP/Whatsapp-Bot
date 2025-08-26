@@ -1,5 +1,5 @@
 {
-  "name": "whatsapp-bot",
+  "name": "groundupmvp-whatsapp-bot",
   "module": "index.ts",
   "type": "module",
   "private": true,

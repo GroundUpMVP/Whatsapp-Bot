@@ -5,7 +5,12 @@ import OpenAI from "openai";
 const openAiClient = new OpenAI();
 
 // Create a new client instance
-const client = new Client({});
+const client = new Client({
+  puppeteer: {
+    headless: true,
+    executablePath: Bun.env.PUPPETEER_EXECUTABLE_PATH,
+  },
+});
 
 // When the client is ready, run this code (only once)
 client.once("ready", () => {
@@ -53,7 +58,7 @@ client.on("message_create", async (message) => {
     });
 
     const reply = response.output_text || "Sorry, I didn’t understand that.";
-    
+
     await client.sendMessage(message.from, reply);
   } catch (error) {
     console.error("Error handling message:", error);
