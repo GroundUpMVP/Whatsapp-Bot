@@ -1,4 +1,4 @@
-import {Client} from "whatsapp-web.js";
+import { Client } from "whatsapp-web.js";
 import qrcode from "qrcode-terminal";
 import OpenAI from "openai";
 
@@ -9,6 +9,7 @@ const client = new Client({
   puppeteer: {
     headless: true,
     executablePath: Bun.env.PUPPETEER_EXECUTABLE_PATH,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   },
 });
 
@@ -19,7 +20,7 @@ client.once("ready", () => {
 
 // When the client receives QR-Code
 client.on("qr", (qr) => {
-  qrcode.generate(qr, {small: true});
+  qrcode.generate(qr, { small: true });
 });
 
 client.on("message_create", async (message) => {
